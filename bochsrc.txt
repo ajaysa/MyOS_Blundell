@@ -1,0 +1,11 @@
+megs: 32
+romimage: file=/usr/share/bochs/BIOS-bochs-latest
+vgaromimage: file=/usr/share/bochs/VGABIOS-lgpl-latest
+floppya: 1_44=os-image, status=inserted
+boot: a
+log: bochsout.txt
+mouse: enabled=0
+clock: sync=realtime
+cpu: ips=500000
+display_library: sdl
+keyboard_serial_delay: 200
