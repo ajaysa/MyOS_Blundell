@@ -10,5 +10,19 @@ void main()
 
 	init_video();
 
+	idt_install();
+	isr_install();
+	irq_install();
+
+	timer_install();
+	keyboard_install();
+
+	__asm__ __volatile__ ("sti");
+
 	print("Hello World\n");
+
+	print("\n\tFrom Ajay Saini!\n");
+
+	// test : running of exception handlers
+	//print(20/0);
 }
