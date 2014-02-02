@@ -64,6 +64,10 @@ void printchar(const char ch)
 	{
 		if ( cur_x > 0 )
 			cur_x--;
+
+		// delete the character
+		where = textpointer + cur_y*MAX_COLUMNS + cur_x;
+		*where = attribute_byte | 0x20;
 	}
 
 	if ( ch == 0x09 ) // handle tab
