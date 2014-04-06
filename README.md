@@ -11,13 +11,22 @@ Current code :
 - Handle keyboard inputs
 - Handle timer interrupt
 
+ToBeDone :
+- Memory management - malloc/free
+- paging
+- scheduler
+- multi-programming
+
 
 COMPILE:
 	make
+
 RUN:
 	make run
+
 CLEAN
 	make clean
+
 
 REFERENCES:
 * Writing a simple operating system from scratch by Nick Blundell
