@@ -1,5 +1,10 @@
 #include <kernel.h>
 
+// FUNCTIONKEY key : shows that a special key pressed
+// Go to kbdus_functkey layout
+// 0 is OFF; 1 is ON
+unsigned int FUNCTIONKEY = 0;
+
 // KBDUS means US Keyboard Layout. This is a scancode table
 //  used to layout a standard US keyboard. 
 unsigned char kbdus[128] =
@@ -42,6 +47,46 @@ unsigned char kbdus[128] =
     0,  /* All other keys are undefined */
 };
 
+unsigned char kbdus_functkey[128] =
+{
+    0,  27, '!', '@', '#', '$', '%', '^', '&', '*',     /* 9 */
+  '(', ')', '_', '+', '\b',     /* Backspace */
+  '\t',                 /* Tab */
+  'Q', 'W', 'E', 'R',   /* 19 */
+  'T', 'Y', 'U', 'I', 'O', 'P', '{', '}', '\n', /* Enter key */
+    0,                  /* 29   - Control */
+  'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ':',     /* 39 */
+ '\"', '~',   0,                /* Left shift */
+ '|', 'Z', 'X', 'C', 'V', 'B', 'N',                    /* 49 */
+  'M', '<', '>', '?',   0,                              /* Right shift */
+  '*',
+    0,  /* Alt */
+  ' ',  /* Space bar */
+    0,  /* Caps lock */
+    0,  /* 59 - F1 key ... > */
+    0,   0,   0,   0,   0,   0,   0,   0,
+    0,  /* < ... F10 */
+    0,  /* 69 - Num lock*/
+    0,  /* Scroll Lock */
+    0,  /* Home key */
+    0,  /* Up Arrow */
+    0,  /* Page Up */
+  '-',
+    0,  /* Left Arrow */
+    0,
+    0,  /* Right Arrow */
+  '+',
+    0,  /* 79 - End key*/
+    0,  /* Down Arrow */
+    0,  /* Page Down */
+    0,  /* Insert Key */
+    0,  /* Delete Key */
+    0,   0,   0,
+    0,  /* F11 Key */
+    0,  /* F12 Key */
+    0,  /* All other keys are undefined */
+};
+
 /* Handles the keyboard interrupt */
 void keyboard_handler(struct regs *r)
 {
@@ -56,6 +101,11 @@ void keyboard_handler(struct regs *r)
     {
         /* You can use this one to see if the user released the
         *  shift, alt, or control keys... */
+
+	// Left Shift key(0xAA) /right shift key(0xB6) released
+	// Remember that first bit is on!!
+	if ( ! (scancode ^ 0xAA) || ! (scancode ^ 0xB6) )
+                FUNCTIONKEY = 0;
     }
     else
     {
@@ -71,7 +121,27 @@ void keyboard_handler(struct regs *r)
         *  to the above layout to correspond to 'shift' being
         *  held. If shift is held using the larger lookup table,
         *  you would add 128 to the scancode when you look for it */
-        printchar(kbdus[scancode]);
+
+	// FUNCTIONKEY Key pressed
+
+	// 0x3A:CAPS LOCK Key;
+	if ( ! (scancode ^ 0x3A) )
+	{
+		if ( FUNCTIONKEY == 1 )
+			FUNCTIONKEY = 0;
+		else
+			FUNCTIONKEY = 1;
+	}
+
+	// 0x2A:Left SHIFT Key;
+	// 0x36:Right SHIFT Key;
+	if ( ! (scancode ^ 0x2A) || ! (scancode ^ 0x36) )
+		FUNCTIONKEY = 1;
+
+	if ( FUNCTIONKEY == 1 )
+		printchar(kbdus_functkey[scancode]);
+	else
+		printchar(kbdus[scancode]);
     }
 }
 
