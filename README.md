@@ -12,6 +12,7 @@ Current code :
 - Handle timer interrupt
 
 ToBeDone :
+- Enable functioning of shift key in keyboard driver(i.e. print capital characters, special symbols ....)
 - Memory management - malloc/free
 - paging
 - scheduler
