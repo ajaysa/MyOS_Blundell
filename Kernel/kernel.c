@@ -1,3 +1,5 @@
+#include <kernel.h>
+
 void some_function()
 {
 }
@@ -22,6 +24,8 @@ void main()
 	print("Hello World\n");
 
 	print("\n\tFrom Ajay Saini!\n");
+
+	print(_CMD);
 
 	// test : running of exception handlers
 	//print(20/0);
