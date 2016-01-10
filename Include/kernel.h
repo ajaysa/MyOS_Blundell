@@ -1,3 +1,6 @@
+// Coomand prompt symbol
+#define _CMD "$$:"
+
 /* This defines what the stack looks like after an ISR was running */
 struct regs
 {
