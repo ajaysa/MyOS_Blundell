@@ -10,9 +10,9 @@ Current code :
 - Handle screen - print on screen, scroll
 - Handle keyboard inputs
 - Handle timer interrupt
+- Functioning of shift key in keyboard driver(i.e. print capital characters, special symbols ....)
 
 ToBeDone :
-- Enable functioning of shift key in keyboard driver(i.e. print capital characters, special symbols ....)
 - Memory management - malloc/free
 - paging
 - scheduler
