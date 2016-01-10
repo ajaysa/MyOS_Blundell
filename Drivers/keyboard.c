@@ -105,7 +105,12 @@ void keyboard_handler(struct regs *r)
 	// Left Shift key(0xAA) /right shift key(0xB6) released
 	// Remember that first bit is on!!
 	if ( ! (scancode ^ 0xAA) || ! (scancode ^ 0xB6) )
-                FUNCTIONKEY = 0;
+	{
+		if ( FUNCTIONKEY == 1 )
+			FUNCTIONKEY = 0;
+		else
+			FUNCTIONKEY = 1;
+	}
     }
     else
     {
@@ -136,7 +141,12 @@ void keyboard_handler(struct regs *r)
 	// 0x2A:Left SHIFT Key;
 	// 0x36:Right SHIFT Key;
 	if ( ! (scancode ^ 0x2A) || ! (scancode ^ 0x36) )
-		FUNCTIONKEY = 1;
+	{
+		if ( FUNCTIONKEY == 1 )
+			FUNCTIONKEY = 0;
+		else
+			FUNCTIONKEY = 1;
+	}
 
 	if ( FUNCTIONKEY == 1 )
 		printchar(kbdus_functkey[scancode]);
