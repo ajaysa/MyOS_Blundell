@@ -152,6 +152,10 @@ void keyboard_handler(struct regs *r)
 		printchar(kbdus_functkey[scancode]);
 	else
 		printchar(kbdus[scancode]);
+
+	// If Enter Key is pressed we need to print CMD prompt on the screen
+	if ( ! (scancode ^ 0x1C) )
+		print(_CMD);
     }
 }
 
