@@ -1,5 +1,6 @@
 #include <kheap.h>
 
+// points to start of kernel heap
 void *base = NULL;
 
 void kheap_SPEC()
