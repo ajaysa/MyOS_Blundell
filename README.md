@@ -11,9 +11,11 @@ Current code :
 - Handle keyboard inputs
 - Handle timer interrupt
 - Functioning of shift key in keyboard driver(i.e. print capital characters, special symbols ....)
+- Added a basic malloc/free
 
 ToBeDone :
-- Memory management - malloc/free
+- Implement scanf functionality
+- Memory management - malloc/free : Advanced/more features
 - paging
 - scheduler
 - multi-programming
