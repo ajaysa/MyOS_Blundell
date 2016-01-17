@@ -1,5 +1,5 @@
 # Automatically generate lists of sources using wildcards
-C_SOURCES = $(wildcard Kernel/*.c Drivers/*.c)
+C_SOURCES = $(wildcard Kernel/*.c Drivers/*.c Memory/*.c)
 HEADERS = $(wildcard Include/*.h)
 
 # Convert the *.c filenames to *.o to give a list of object files to build
@@ -41,4 +41,4 @@ kernel.bin:	Kernel/kernel_entry.o ${OBJ}
 
 clean:
 	rm -rf *.bin os-image
-	rm -rf Kernel/*.o Boot/*.bin Drivers/*.o
+	rm -rf Kernel/*.o Boot/*.bin Drivers/*.o Memory/*.o
